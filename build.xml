@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<project name="boilerplate" default="main" basedir=".">
+    <description>
+        Boilerplate
+    </description>
+
+    <!--
+    ********************************
+    Global properties for this build
+    ********************************
+    //--><!-- sdfsdfasdfsdffasdf -->
+    <property name="product.name" value="Boilerplate"/>
+    <property name="product.shortname" value="boilerplate"/>
+    <property environment="env"/>
+    <property name="aws" value="23.23.244.142"/>
+
+    <!--
+    ********************************
+    Tasks for NodeJS
+    ********************************
+    //-->
+    <target name="dev"
+            description="Sync dev build to /var/www/boilerplate/dev">
+        <exec executable="rsync">
+            <arg line="-avz --delete --safe-links
+                --exclude '.git*'
+                --exclude '.DS*'
+                --exclude '.*.sw*'
+                --exclude 'ext'
+                ./bin/dev/ newton@${aws}:/var/www/boilerplate/dev"/>
+        </exec>
+    </target>
+
+    <target name="prod"
+            description="Sync dev build to /var/www/boilerplate/prod">
+        <exec executable="rsync">
+            <arg line="-avz --delete --safe-links
+                --exclude '.git*'
+                --exclude '.DS*'
+                --exclude '.*.sw*'
+                --exclude 'ext'
+                ./bin/prod/ newton@${aws}:/var/www/boilerplate/prod"/>
+        </exec>
+    </target>
+
+</project>
